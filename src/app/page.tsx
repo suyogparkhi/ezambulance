@@ -72,7 +72,7 @@ export default function Component() {
               Together, we can make a difference, one life at a time.
             </h1>
             <p className={`text-xl ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'} mb-12 leading-relaxed max-w-3xl mx-auto`}>
-              "Join Our Vision for Enhanced Emergency Care: Embracing Futuristic Solutions for Ambulance Fleet Management, Patient Care, and Service Optimization."
+              &quot;Join Our Vision for Enhanced Emergency Care: Embracing Futuristic Solutions for Ambulance Fleet Management, Patient Care, and Service Optimization.&quot;
             </p>
             <button className="bg-orange-500 text-white font-medium px-8 py-4 rounded-full inline-flex items-center hover:bg-orange-600 transition-colors">
               Get in touch
@@ -105,7 +105,7 @@ export default function Component() {
               About us
             </h2>
             <p className={`text-xl ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'} mb-12 leading-relaxed`}>
-              At Lifeline Ambulance Services, we're committed to saving lives sustainably. From fuel-efficient vehicles to waste reduction, we're pioneering eco-conscious practices in emergency medical transportation. Join us in driving toward a greener future, one ambulance ride at a time.
+              At Lifeline Ambulance Services, we&apos;re committed to saving lives sustainably. From fuel-efficient vehicles to waste reduction, we&apos;re pioneering eco-conscious practices in emergency medical transportation. Join us in driving toward a greener future, one ambulance ride at a time.
             </p>
             <button className={`group ${isDarkTheme ? 'border-gray-700 text-gray-300 hover:bg-gray-800' : 'border-gray-300 text-gray-700 hover:bg-gray-200'} border font-medium px-8 py-4 rounded-full inline-flex items-center hover:text-black transition-all`}>
               Read more
