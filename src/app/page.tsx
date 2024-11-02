@@ -2,9 +2,18 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { ArrowRight, Check, ChevronRight, Mail, MapPin, Moon, Phone, Sun } from 'lucide-react'
+import { ArrowRight, Calculator, Check, ChevronRight, Mail, MapPin, Moon, Phone, Sun } from 'lucide-react'
 
 export default function Component() {
+
+  const [ambulances, setAmbulances] = useState(1)
+  const [extraDrivers, setExtraDrivers] = useState(0)
+
+  const basePrice = 249
+  const extraDriverPrice = 99
+
+  const totalPrice = basePrice * ambulances + extraDriverPrice * extraDrivers
+
   const [isDarkTheme, setIsDarkTheme] = useState(true)
 
   const toggleTheme = () => {
@@ -117,58 +126,105 @@ export default function Component() {
         <section id="pricing" className={`${isDarkTheme ? 'bg-gray-800/50' : 'bg-gray-200'} py-24 backdrop-blur-xl`}>
           <div className="container mx-auto px-4">
             <h2 className={`text-5xl font-bold text-center mb-8 ${isDarkTheme ? 'bg-gradient-to-r from-white to-gray-400' : 'bg-gradient-to-r from-gray-900 to-gray-600'} bg-clip-text text-transparent`}>
-              Pricing
+              Ambulance Registration Pricing
             </h2>
             <p className={`text-xl text-center ${isDarkTheme ? 'text-gray-400' : 'text-gray-600'} mb-16 max-w-3xl mx-auto`}>
-              Our pricing plans are simple and designed to cater to households and companies of various sizes. Choose a plan that suits your needs and budget.
+              Our pricing is designed to cater to ambulance services of various sizes. Choose our basic plan or calculate a custom price based on your needs.
             </p>
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {['Basic', 'Pro', 'Enterprise'].map((plan, index) => (
-                <div 
-                  key={plan} 
-                  className={`${
-                    index === 1 
-                      ? 'bg-orange-500 text-white border-orange-400' 
-                      : isDarkTheme
-                        ? 'bg-gray-800 text-gray-100 border-gray-700'
-                        : 'bg-white text-gray-900 border-gray-200'
-                  } p-8 rounded-2xl border backdrop-blur-xl hover:scale-105 transition-transform duration-300`}
-                >
-                  <h3 className="text-2xl font-bold mb-4">{plan}</h3>
-                  <div className="flex items-baseline mb-6">
-                    <span className="text-5xl font-bold">$59</span>
-                    <span className={`ml-2 ${index === 1 ? 'text-orange-200' : isDarkTheme ? 'text-gray-400' : 'text-gray-500'}`}>/month</span>
-                  </div>
-                  <p className={`mb-8 text-sm ${index === 1 ? 'text-orange-100' : isDarkTheme ? 'text-gray-400' : 'text-gray-500'}`}>
-                    For small households or businesses with moderate energy consumption
-                  </p>
-                  <button 
-                    className={`w-full px-6 py-3 rounded-lg font-medium transition-colors ${
-                      index === 1 
-                        ? 'bg-white text-orange-500 hover:bg-gray-100' 
-                        : isDarkTheme
-                          ? 'bg-gray-700 text-white hover:bg-gray-600'
-                          : 'bg-gray-200 text-gray-900 hover:bg-gray-300'
-                    }`}
-                  >
-                    Get started
-                  </button>
-                  <ul className="mt-8 space-y-4">
-                    <li className="flex items-center text-sm">
-                      <Check className={`h-5 w-5 mr-3 ${index === 1 ? 'text-white' : 'text-green-400'}`} />
-                      <span>Fixed amount of renewable energy supply</span>
-                    </li>
-                    <li className="flex items-center text-sm">
-                      <Check className={`h-5 w-5 mr-3 ${index === 1 ? 'text-white' : 'text-green-400'}`} />
-                      <span>Installation support for chosen energy type</span>
-                    </li>
-                    <li className="flex items-center text-sm">
-                      <Check className={`h-5 w-5 mr-3 ${index === 1 ? 'text-white' : 'text-green-400'}`} />
-                      <span>Basic customer support included</span>
-                    </li>
-                  </ul>
+            
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* Basic Plan */}
+              <div className={`${isDarkTheme ? 'bg-gray-800 text-gray-100 border-gray-700' : 'bg-white text-gray-900 border-gray-200'} p-8 rounded-2xl border backdrop-blur-xl hover:scale-105 transition-transform duration-300`}>
+                <h3 className="text-2xl font-bold mb-4">Basic Plan</h3>
+                <div className="flex items-baseline mb-6">
+                  <span className="text-5xl font-bold">₹249</span>
+                  <span className={`ml-2 ${isDarkTheme ? 'text-gray-400' : 'text-gray-500'}`}>/month</span>
                 </div>
-              ))}
+                <p className={`mb-8 text-sm ${isDarkTheme ? 'text-gray-400' : 'text-gray-500'}`}>
+                  For registering a single ambulance with up to 2 drivers
+                </p>
+                <button 
+                  className={`w-full px-6 py-3 rounded-lg font-medium transition-colors ${
+                    isDarkTheme
+                      ? 'bg-gray-700 text-white hover:bg-gray-600'
+                      : 'bg-gray-200 text-gray-900 hover:bg-gray-300'
+                  }`}
+                >
+                  Get started
+                </button>
+                <ul className="mt-8 space-y-4">
+                  <li className="flex items-center text-sm">
+                    <Check className="h-5 w-5 mr-3 text-green-400" />
+                    <span>Register 1 Ambulance</span>
+                  </li>
+                  <li className="flex items-center text-sm">
+                    <Check className="h-5 w-5 mr-3 text-green-400" />
+                    <span>Up to 2 drivers per ambulance</span>
+                  </li>
+                  <li className="flex items-center text-sm">
+                    <Check className="h-5 w-5 mr-3 text-green-400" />
+                    <span>24/7 customer support</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Custom Price Calculator */}
+              <div className={`${isDarkTheme ? 'bg-gray-800 text-gray-100 border-gray-700' : 'bg-white text-gray-900 border-gray-200'} p-8 rounded-2xl border backdrop-blur-xl`}>
+                <h3 className="text-2xl font-bold mb-4 flex items-center">
+                  <Calculator className="mr-2" />
+                  Custom Price Calculator
+                </h3>
+                <div className="space-y-4 mb-6">
+                  <div>
+                    <label htmlFor="ambulances" className="block text-sm font-medium mb-1">Number of Ambulances</label>
+                    <input 
+                      id="ambulances"
+                      type="number" 
+                      min="1" 
+                      value={ambulances} 
+                      onChange={(e) => setAmbulances(parseInt(e.target.value) || 1)}
+                      className={`w-full px-3 py-2 rounded-md ${isDarkTheme ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-100 border-gray-300 text-gray-900'}`}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="extraDrivers" className="block text-sm font-medium mb-1">Extra Drivers (beyond 2 per ambulance)</label>
+                    <input 
+                      id="extraDrivers"
+                      type="number" 
+                      min="0" 
+                      value={extraDrivers} 
+                      onChange={(e) => setExtraDrivers(parseInt(e.target.value) || 0)}
+                      className={`w-full px-3 py-2 rounded-md ${isDarkTheme ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-100 border-gray-300 text-gray-900'}`}
+                    />
+                  </div>
+                </div>
+                <div className="text-3xl font-bold mb-4">
+                  Total: ₹{totalPrice}/month
+                </div>
+                <button 
+                  className={`w-full px-6 py-3 rounded-lg font-medium transition-colors ${
+                    isDarkTheme
+                      ? 'bg-gray-700 text-white hover:bg-gray-600'
+                      : 'bg-gray-200 text-gray-900 hover:bg-gray-300'
+                  }`}
+                >
+                  Get Custom Plan
+                </button>
+                <ul className="mt-8 space-y-4">
+                  <li className="flex items-center text-sm">
+                    <Check className="h-5 w-5 mr-3 text-green-400" />
+                    <span>₹249 per ambulance</span>
+                  </li>
+                  <li className="flex items-center text-sm">
+                    <Check className="h-5 w-5 mr-3 text-green-400" />
+                    <span>₹99 per extra driver (beyond 2 per ambulance)</span>
+                  </li>
+                  <li className="flex items-center text-sm">
+                    <Check className="h-5 w-5 mr-3 text-green-400" />
+                    <span>Customized support based on fleet size</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </section>
